@@ -54,6 +54,18 @@ const transfer_functions: { description: string, func: Transfer_Function }[] = [
                 multiply(add(1, multiply(s, c.R, c.C)), add(c.R, divide(1, multiply(s, c.C)))),
             );
         },
+    },
+
+    {
+        description: 'RLC Tank',
+        func: function (s: math.Complex): math.MathType {
+            return divide(
+                multiply(s, c.L), 
+                add(
+                    multiply(square(s), multiply(c.L, c.C)), 
+                    add(multiply(divide(c.L, c.R), s), 1))
+                )
+        }
     }
 
 ];
@@ -72,7 +84,7 @@ Object.keys(c).forEach(k => {
     sliders[k]!.value = c[k].toString();
     // @ts-ignore
 
-    document.getElementById(`${k}-value`)!.textContent = `${k}: ${(c[k] as number).toPrecision(3).toString().padEnd(5)}`;
+    document.getElementById(`${k}-value`)!.textContent = `${k}: ${(c[k] as number).toPrecision(3).toString().padStart(5, "")}`;
 
     sliders[k]!.addEventListener('input', () => {
         // @ts-ignore

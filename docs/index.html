@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Transfer Functions</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/13.0.0/math.js"></script>
@@ -17,25 +17,28 @@
         <div class="labels">
             <div style="display: flex; gap: 20px; align-items: flex-start;">
                 <div>
-                    <label><span id="R-value">R</span>: <input type="range" id="R" min="0.001" max="1"
+                    <label><span id="R-value" class="value-span">R</span>: <input type="range" id="R" min="0.001" max="1"
                             step="0.001"></label>
-                    <label><span id="L-value">L</span>: <input type="range" id="L" min="0.001" max="1"
+                    <label><span id="L-value" class="value-span">L</span>: <input type="range" id="L" min="0.001" max="1"
                             step="0.001"></label>
-                    <label><span id="C-value">C</span>: <input type="range" id="C" min="0.001" max="1"
+                    <label><span id="C-value" class="value-span">C</span>: <input type="range" id="C" min="0.001" max="1"
                             step="0.001"></label>
                 </div>
                 <div>
-                    <label><input type="range" id="LB" min="-10" max="-1" step="1" value="-4"
-    onpointermove="_plot_active()" oninput="document.getElementById('LB-value').textContent = this.value">
-    :<span id="LB-value">-4</span> Lower Exponent</label>
+                    <label>Lower Exponent:<span id="LB-value" class="value-span">-4</span><input type="range" id="LB" min="-10" max="-1"
+                            step="1" value="-4" onpointermove="_plot_active()"
+                            oninput="document.getElementById('LB-value').textContent = this.value">
+                    </label>
 
-<label><input type="range" id="UB" min="1" max="10" step="1" value="4"
-    onpointermove="_plot_active()" oninput="document.getElementById('UB-value').textContent = this.value">
-    :<span id="UB-value">4</span> Upper Exponent</label>
+                    <label>Upper Exponent:<span id="UB-value" class="value-span">4</span> <input type="range" id="UB" min="1" max="10"
+                            step="1" value="4" onpointermove="_plot_active()"
+                            oninput="document.getElementById('UB-value').textContent = this.value">
+                    </label>
 
-<label><input type="range" id="PREC" min="1.005" max="2" step="0.01" value="1.01"
-    onpointermove="_plot_active()" oninput="document.getElementById('PREC-value').textContent = this.value">
-    :<span id="PREC-value">1.01</span> Step Precision</label>
+                    <label>Step Precision:<span id="PREC-value" class="value-span">1.01</span> <input type="range" id="PREC" min="1.005"
+                            max="2" step="0.01" value="1.01" onpointermove="_plot_active()"
+                            oninput="document.getElementById('PREC-value').textContent = this.value">
+                    </label>
                 </div>
             </div>
         </div>

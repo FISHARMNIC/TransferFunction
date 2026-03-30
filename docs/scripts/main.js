@@ -30,6 +30,12 @@ const transfer_functions = [
         func: function (s) {
             return divide(c.R, multiply(add(1, multiply(s, c.R, c.C)), add(c.R, divide(1, multiply(s, c.C)))));
         },
+    },
+    {
+        description: 'RLC Tank',
+        func: function (s) {
+            return divide(multiply(s, c.L), add(multiply(square(s), multiply(c.L, c.C)), add(multiply(divide(c.L, c.R), s), 1)));
+        }
     }
 ];
 let active_transfer_function;
@@ -42,7 +48,7 @@ Object.keys(c).forEach(k => {
     // @ts-ignore
     sliders[k].value = c[k].toString();
     // @ts-ignore
-    document.getElementById(`${k}-value`).textContent = `${k}: ${c[k].toPrecision(3).toString().padEnd(5)}`;
+    document.getElementById(`${k}-value`).textContent = `${k}: ${c[k].toPrecision(3).toString().padStart(5, "")}`;
     sliders[k].addEventListener('input', () => {
         // @ts-ignore
         c[k] = parseFloat(sliders[k].value);
