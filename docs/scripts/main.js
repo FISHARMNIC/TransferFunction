@@ -41,7 +41,7 @@ const plot_active = () => {
 Object.keys(c).forEach(k => {
     // @ts-ignore
     sliders[k].value = c[k].toString();
-    sliders[k].addEventListener('mousemove', () => {
+    sliders[k].addEventListener('pointermove', () => {
         // @ts-ignore
         c[k] = parseFloat(sliders[k].value);
         plot_active();
