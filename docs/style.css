@@ -1,0 +1,100 @@
+body {
+    overflow: hidden;
+    /* background-color: #33383b; */
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+    transition: 200ms;
+}
+
+
+#chart {
+    width: 80vw;
+    height: 40vh;
+    margin: 0 auto;
+    /* background-color: black; */
+}
+
+.stuff {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+.scrolls {
+    width: 70vw;
+    max-height: 40vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.button-card {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: lightgray;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.button-card:hover {
+    transform: scale(1.05);
+}
+
+.no-hover:hover {
+    transform: none;
+}
+
+.button-card:active {
+    transform: scale(0.99);
+}
+
+button {
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.labels {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin: 4px;
+
+}
+
+.title {
+    font-size: large;
+    font-weight: bold;
+}
+
+#get_custom {
+    margin-top: 8px;
+    width: 90%;
+    height: 30px;
+    border-radius: 10px;
+}
+
+#set_custom:hover {
+    transform: scale(1.05);
+}
