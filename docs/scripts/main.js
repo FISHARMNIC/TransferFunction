@@ -41,9 +41,13 @@ const plot_active = () => {
 Object.keys(c).forEach(k => {
     // @ts-ignore
     sliders[k].value = c[k].toString();
-    sliders[k].addEventListener('pointermove', () => {
+    // @ts-ignore
+    document.getElementById(`${k}-value`).textContent = `${k}: ${c[k].toPrecision(3).toString().padEnd(5)}`;
+    sliders[k].addEventListener('input', () => {
         // @ts-ignore
         c[k] = parseFloat(sliders[k].value);
+        // @ts-ignore
+        document.getElementById(`${k}-value`).textContent = `${k}: ${c[k]}`;
         plot_active();
     });
 });

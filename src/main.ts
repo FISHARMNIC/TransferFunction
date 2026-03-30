@@ -70,10 +70,16 @@ const plot_active = (): void => {
 Object.keys(c).forEach(k => {
     // @ts-ignore
     sliders[k]!.value = c[k].toString();
+    // @ts-ignore
 
-    sliders[k]!.addEventListener('pointermove', () => {
+    document.getElementById(`${k}-value`)!.textContent = `${k}: ${(c[k] as number).toPrecision(3).toString().padEnd(5)}`;
+
+    sliders[k]!.addEventListener('input', () => {
         // @ts-ignore
         c[k] = parseFloat(sliders[k]!.value);
+
+        // @ts-ignore
+        document.getElementById(`${k}-value`)!.textContent = `${k}: ${c[k]}`;
 
         plot_active();
     });

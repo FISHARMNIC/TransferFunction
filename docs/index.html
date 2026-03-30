@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +10,34 @@
     <script src='https://cdn.plot.ly/plotly-3.4.0.min.js'></script>
     <script src="scripts/main.js" type="module"></script>
 </head>
+
 <body>
     <div id='chart'></div>
     <div class="stuff">
         <div class="labels">
-         <div style="display: flex; gap: 20px; align-items: flex-start;">
-    <div>
-        <label>R: <input type="range" id="R" min="0.001" max="1" step="0.001"></label>
-        <label>L: <input type="range" id="L" min="0.001" max="1" step="0.001"></label>
-        <label>C: <input type="range" id="C" min="0.001" max="1" step="0.001"></label>
-    </div>
-    <div>
-        <label>Lower Exponent: <input type="range" id="LB" min="-10" max="-1" step="1" value="-4" onpointermove="_plot_active()"></label>
-        <label>Upper Exponent: <input type="range" id="UB" min="1" max="10" step="1" value="4" onpointermove="_plot_active()"></label>
-        <label>Step Precision: <input type="range" id="PREC" min="1.005" max="2" step="0.01" value="1.01" onpointermove="_plot_active()"></label>
-    </div>
-</div>
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+                <div>
+                    <label><span id="R-value">R</span>: <input type="range" id="R" min="0.001" max="1"
+                            step="0.001"></label>
+                    <label><span id="L-value">L</span>: <input type="range" id="L" min="0.001" max="1"
+                            step="0.001"></label>
+                    <label><span id="C-value">C</span>: <input type="range" id="C" min="0.001" max="1"
+                            step="0.001"></label>
+                </div>
+                <div>
+                    <label><input type="range" id="LB" min="-10" max="-1" step="1" value="-4"
+    onpointermove="_plot_active()" oninput="document.getElementById('LB-value').textContent = this.value">
+    :<span id="LB-value">-4</span> Lower Exponent</label>
+
+<label><input type="range" id="UB" min="1" max="10" step="1" value="4"
+    onpointermove="_plot_active()" oninput="document.getElementById('UB-value').textContent = this.value">
+    :<span id="UB-value">4</span> Upper Exponent</label>
+
+<label><input type="range" id="PREC" min="1.005" max="2" step="0.01" value="1.01"
+    onpointermove="_plot_active()" oninput="document.getElementById('PREC-value').textContent = this.value">
+    :<span id="PREC-value">1.01</span> Step Precision</label>
+                </div>
+            </div>
         </div>
         <div class="scrolls">
             <div id="buttons">
@@ -38,4 +51,5 @@
         </div>
     </div>
 </body>
+
 </html>
