@@ -41,7 +41,7 @@ export const init_buttons = (transfer_functions) => {
     transfer_functions.forEach((fn, i) => {
         let s = clean_function(fn.func);
         s = `<span class='title'>${fn.description}</span>\n\n${s}`;
-        buttons.insertAdjacentHTML('beforeend', `<div class="button-card" onclick="_set_transfer_function(${i})"><pre>${s}</pre></button><br>`);
+        buttons.insertAdjacentHTML('beforeend', `<div class="button-card" onclick="_set_transfer_function(${i}); user_select(this)"><pre>${s}</pre></button><br>`);
     });
     document.getElementById('set_custom').addEventListener('click', () => {
         const val = document.getElementById('get_custom').value;
@@ -54,4 +54,13 @@ export const init_buttons = (transfer_functions) => {
             window.alert(`[ERROR] Bad transfer function.\n\n${err}`);
         }
     });
+};
+let active_button = null;
+// @ts-ignore
+window.user_select = (e) => {
+    if (active_button) {
+        active_button.style.filter = 'none';
+    }
+    e.style.filter = 'drop-shadow(0px 0px 10px rgba(0,0,0,0.5))';
+    active_button = e;
 };

@@ -58,7 +58,7 @@ export const init_buttons = (transfer_functions: Transfer_Function_Entry[]) => {
 
         s = `<span class='title'>${fn.description}</span>\n\n${s}`;
 
-        buttons.insertAdjacentHTML('beforeend', `<div class="button-card" onclick="_set_transfer_function(${i})"><pre>${s}</pre></button><br>`)
+        buttons.insertAdjacentHTML('beforeend', `<div class="button-card" onclick="_set_transfer_function(${i}); user_select(this)"><pre>${s}</pre></button><br>`)
 
     })
 
@@ -74,4 +74,16 @@ export const init_buttons = (transfer_functions: Transfer_Function_Entry[]) => {
             window.alert(`[ERROR] Bad transfer function.\n\n${err}`)
         }
     })
+}
+
+let active_button: HTMLDivElement | null = null;
+
+// @ts-ignore
+window.user_select = (e: HTMLDivElement) => {
+    if(active_button)
+    {
+        active_button.style.filter = 'none';
+    }
+    e.style.filter = 'drop-shadow(0px 0px 10px rgba(0,0,0,0.5))';
+    active_button = e;
 }

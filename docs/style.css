@@ -1,6 +1,6 @@
-body {
+/* body {
     overflow: hidden;
-}
+} */
 
 * {
     box-sizing: border-box;
@@ -27,7 +27,7 @@ body {
 
 .scrolls {
     width: min(70vw, 95vw);
-    max-height: 35vh;
+    max-height: 40vh;
     overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid black;
@@ -62,10 +62,10 @@ pre {
 .no-hover:hover {
     transform: none;
 }
-
+/* 
 .button-card:active {
     transform: scale(0.99);
-}
+} */
 
 button {
     border-radius: 8px;
@@ -94,9 +94,9 @@ label {
     border-radius: 10px;
 }
 
-#set_custom:hover {
+/* #set_custom:hover {
     transform: scale(1.05);
-}
+} */
 
 @media (max-width: 600px) {
     #chart {
