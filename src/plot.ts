@@ -1,15 +1,13 @@
-import { input_prec, magnitude, to_complex } from './util.js';
-
 declare const Plotly: typeof import('plotly.js');
+import { magnitude, to_complex } from './util.js';
 declare const math: typeof import('mathjs');
-
 const { multiply } = math;
 
 export type Transfer_Function = (s: math.Complex) => math.MathType;
-
+export type Transfer_Function_Entry = { description: string, func: Transfer_Function };
 export type v2 = { x: number[], y: number[] };
 
-
+let first: boolean = true;
 
 const gen_points = (transfer_function: Transfer_Function, lower: number, upper: number): v2 => {
     const out: v2 = { x: [], y: [] };
@@ -40,12 +38,9 @@ const gen_points = (transfer_function: Transfer_Function, lower: number, upper: 
     return out;
 }
 
+export const plot = (transfer_function: Transfer_Function_Entry, lower: number, upper: number): void => {
 
-let first: boolean = true;
-
-export const plot = (transfer_function: Transfer_Function, lower: number, upper: number): void => {
-
-    const points = gen_points(transfer_function, lower, upper);
+    const points = gen_points(transfer_function.func, lower, upper);
 
     const trace2 = {
         x: points.x,
@@ -63,9 +58,10 @@ export const plot = (transfer_function: Transfer_Function, lower: number, upper:
         yaxis: {
             // type: 'log' as const,
             autorange: true,
-            title: { text: '|H(jω)| (db)' }
+            title: { text: '|H(jω)| (db)' },
+            zeroline: false
         },
-        title: { text: 'Magnitude Plot' }
+        title: { text: `Magnitude Plot: ${transfer_function.description}` }
         // paper_bgcolor: '#33383b',
         // plot_bgcolor: '#33383b',
 

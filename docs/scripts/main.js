@@ -1,7 +1,8 @@
-import { input_lower, input_upper, number_inputs, sliders } from './util.js';
+import { clean_function, init_buttons, init_consts, input_lower, input_upper } from './util.js';
 import { plot } from './plot.js';
 const { multiply, add, square, divide } = math;
-const c = {
+// @ts-ignore
+window.c = {
     L: 1,
     C: 0.1,
     R: 0.2,
@@ -44,48 +45,22 @@ const plot_active = () => {
     const UB = parseInt(input_upper.value);
     plot(active_transfer_function, 10 ** LB, 10 ** UB);
 };
-Object.keys(c).forEach(k => {
-    // @ts-ignore
-    sliders[k].value = c[k].toString();
-    // @ts-ignore
-    number_inputs[k].value = c[k].toString();
-    const update = (val) => {
-        const v2 = parseFloat(val);
-        if (isNaN(v2))
-            return;
-        // @ts-ignore
-        c[k] = v2;
-        sliders[k].value = Math.min(Math.max(v2, 0.001), 1).toString();
-        number_inputs[k].value = val;
-        plot_active();
-    };
-    sliders[k].addEventListener('input', () => update(sliders[k].value));
-    number_inputs[k].addEventListener('change', () => update(number_inputs[k].value));
-});
+// @ts-ignore
+window._plot_active = plot_active;
 const set_transfer_function = (i) => {
-    active_transfer_function = typeof i == 'number' ? transfer_functions[i]?.func : i;
+    if (typeof i == 'number') {
+        active_transfer_function = transfer_functions[i];
+    }
+    else {
+        active_transfer_function = {
+            func: i,
+            description: clean_function(i)
+        };
+    }
     plot_active();
 };
 // @ts-ignore
 window._set_transfer_function = set_transfer_function;
-// @ts-ignore
-window._plot_active = plot_active;
 set_transfer_function(0);
-const buttons = document.getElementById('buttons');
-transfer_functions.forEach((fn, i) => {
-    let s = fn.func.toString();
-    s = s.slice(s.indexOf('return ') + 7, s.lastIndexOf(';'));
-    s = `<span class='title'>${fn.description}</span>\n\n${s}`;
-    buttons.insertAdjacentHTML('beforeend', `<div class="button-card" onclick="_set_transfer_function(${i})"><pre>${s}</pre></button><br>`);
-});
-// buttons.insertAdjacentHTML('beforeend', `<button onclick="_set_transfer_function()"><pre><span class='title'>Custom Transfer Function<span><textarea></textarea></pre></button><br>`)
-document.getElementById('set_custom').addEventListener('click', () => {
-    const val = document.getElementById('get_custom').value;
-    const fn = `(s) => {return (${val});}`;
-    try {
-        set_transfer_function(eval(fn));
-    }
-    catch (err) {
-        window.alert(`[ERROR] Bad transfer function.\n\n${err}`);
-    }
-});
+init_consts(c, plot_active);
+init_buttons(transfer_functions);

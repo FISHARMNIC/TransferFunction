@@ -27,7 +27,7 @@ body {
 
 .scrolls {
     width: min(70vw, 95vw);
-    max-height: 40vh;
+    max-height: 35vh;
     overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid black;

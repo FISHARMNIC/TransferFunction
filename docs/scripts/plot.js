@@ -1,5 +1,6 @@
-import { input_prec, magnitude, to_complex } from './util.js';
+import { magnitude, to_complex } from './util.js';
 const { multiply } = math;
+let first = true;
 const gen_points = (transfer_function, lower, upper) => {
     const out = { x: [], y: [] };
     let step = 1.01; // parseFloat(input_prec.value);
@@ -21,9 +22,8 @@ const gen_points = (transfer_function, lower, upper) => {
     }
     return out;
 };
-let first = true;
 export const plot = (transfer_function, lower, upper) => {
-    const points = gen_points(transfer_function, lower, upper);
+    const points = gen_points(transfer_function.func, lower, upper);
     const trace2 = {
         x: points.x,
         y: points.y,
@@ -39,9 +39,10 @@ export const plot = (transfer_function, lower, upper) => {
         yaxis: {
             // type: 'log' as const,
             autorange: true,
-            title: { text: '|H(jω)| (db)' }
+            title: { text: '|H(jω)| (db)' },
+            zeroline: false
         },
-        title: { text: 'Magnitude Plot' }
+        title: { text: `Magnitude Plot: ${transfer_function.description}` }
         // paper_bgcolor: '#33383b',
         // plot_bgcolor: '#33383b',
     };
