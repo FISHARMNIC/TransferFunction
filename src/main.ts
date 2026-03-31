@@ -1,5 +1,5 @@
 declare const math: typeof import('mathjs');
-import { input_lower, input_upper, sliders } from './util.js';
+import { input_lower, input_upper, number_inputs, sliders } from './util.js';
 import { plot, type Transfer_Function, type v2 } from './plot.js';
 
 const { multiply, add, square, divide } = math;
@@ -60,11 +60,11 @@ const transfer_functions: { description: string, func: Transfer_Function }[] = [
         description: 'RLC Tank',
         func: function (s: math.Complex): math.MathType {
             return divide(
-                multiply(s, c.L), 
+                multiply(s, c.L),
                 add(
-                    multiply(square(s), multiply(c.L, c.C)), 
+                    multiply(square(s), multiply(c.L, c.C)),
                     add(multiply(divide(c.L, c.R), s), 1))
-                )
+            )
         }
     }
 
@@ -83,19 +83,23 @@ Object.keys(c).forEach(k => {
     // @ts-ignore
     sliders[k]!.value = c[k].toString();
     // @ts-ignore
+    number_inputs[k]!.value = c[k].toString();
 
-    document.getElementById(`${k}-value`)!.textContent = `${k}: ${(c[k] as number).toPrecision(3).toString().padStart(5, "")}`;
+    const update = (val: string) => {
+        const v2 = parseFloat(val);
+        if (isNaN(v2)) return;
 
-    sliders[k]!.addEventListener('input', () => {
         // @ts-ignore
-        c[k] = parseFloat(sliders[k]!.value);
-
-        // @ts-ignore
-        document.getElementById(`${k}-value`)!.textContent = `${k}: ${c[k]}`;
-
+        c[k] = v2;
+        sliders[k]!.value = Math.min(Math.max(v2, 0.001), 1).toString();
+        number_inputs[k]!.value = val;
         plot_active();
-    });
-})
+    };
+
+    sliders[k]!.addEventListener('input', () => update(sliders[k]!.value));
+    number_inputs[k]!.addEventListener('change', () => update(number_inputs[k]!.value));
+});
+
 
 const set_transfer_function = (i: number | Transfer_Function): void => {
     active_transfer_function = typeof i == 'number' ? transfer_functions[i]?.func! : i;

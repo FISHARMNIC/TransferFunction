@@ -17,28 +17,31 @@
         <div class="labels">
             <div style="display: flex; gap: 20vw; align-items: flex-start;">
                 <div>
-                    <label><span id="R-value" class="value-span">R</span>: <br><input type="range" id="R" min="0.001" max="1"
-                            step="0.001"></label>
-                    <label><span id="L-value" class="value-span">L</span>: <br><input type="range" id="L" min="0.001" max="1"
-                            step="0.001"></label>
-                    <label><span id="C-value" class="value-span">C</span>: <br><input type="range" id="C" min="0.001" max="1"
-                            step="0.001"></label>
+                    <label>R:
+                        <input type="number" id="R-number" step="10">
+                        <br><input type="range" id="R" min="0.001" max="1" step="0.001"></label>
+                    <label>L:
+                        <input type="number" id="L-number" step="10">
+                        <br><input type="range" id="L" min="0.001" max="1" step="0.001"></label>
+                    <label>C:
+                        <input type="number" id="C-number" step="10">
+                        <br><input type="range" id="C" min="0.001" max="1" step="0.001"></label>
                 </div>
                 <div>
-                    <label>Lower Exponent:<span id="LB-value" class="value-span">-4</span><br><input type="range" id="LB" min="-10" max="-1"
-                            step="1" value="-4" onpointermove="_plot_active()"
+                    <label>Lower Exponent:<span id="LB-value" class="value-span">-4</span><br><input type="range"
+                            id="LB" min="-10" max="-1" step="1" value="-4" onpointermove="_plot_active()"
                             oninput="document.getElementById('LB-value').textContent = this.value">
                     </label>
 
-                    <label>Upper Exponent:<span id="UB-value" class="value-span">4</span><br><input type="range" id="UB" min="1" max="10"
-                            step="1" value="4" onpointermove="_plot_active()"
+                    <label>Upper Exponent:<span id="UB-value" class="value-span">4</span><br><input type="range" id="UB"
+                            min="1" max="10" step="1" value="4" onpointermove="_plot_active()"
                             oninput="document.getElementById('UB-value').textContent = this.value">
                     </label>
 
-                    <label>Step Precision:<span id="PREC-value" class="value-span">1.01</span><br><input type="range" id="PREC" min="1.005"
-                            max="2" step="0.01" value="1.01" onpointermove="_plot_active()"
+                    <!-- <label>Ultra Precision:<span id="PREC-value" class="value-span">1.01</span><br><input type="range"
+                            id="PREC" min="1.005" max="2" step="0.01" value="1.01" onpointermove="_plot_active()"
                             oninput="document.getElementById('PREC-value').textContent = this.value">
-                    </label>
+                    </label> -->
                 </div>
             </div>
         </div>

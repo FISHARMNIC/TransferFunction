@@ -5,7 +5,6 @@ body {
 * {
     box-sizing: border-box;
     font-family: 'Courier New', monospace;
-    transition: 200ms;
 }
 
 #chart {
@@ -20,6 +19,10 @@ body {
     align-items: center;
     gap: 10px;
     padding: 10px;
+}
+
+.stuff * {
+    transition: 200ms;
 }
 
 .scrolls {

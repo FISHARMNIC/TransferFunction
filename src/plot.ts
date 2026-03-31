@@ -14,11 +14,27 @@ export type v2 = { x: number[], y: number[] };
 const gen_points = (transfer_function: Transfer_Function, lower: number, upper: number): v2 => {
     const out: v2 = { x: [], y: [] };
 
-    const step = parseFloat(input_prec.value);
+    let step = 1.01; // parseFloat(input_prec.value);
+
+    let last: number | null = null;
 
     for (let x = lower; x < upper; x *= step) {
+        const mag_lin = magnitude(transfer_function(to_complex(multiply(math.i, x))));
         out.x.push(x);
-        out.y.push(magnitude(transfer_function(to_complex(multiply(math.i, x)))));
+        out.y.push(20 * Math.log10(mag_lin));
+
+        if (last) {
+            const ROC = Math.abs((mag_lin - last) / (x * step - x));
+
+            if (ROC > 10) {
+                step = 0.5 / ROC + 1; // increased precision for peaks. kinda cheap but ok
+                last = mag_lin;
+                continue;
+            }
+        }
+        step = 1.01;
+
+        last = mag_lin;
     }
 
     return out;
@@ -45,9 +61,9 @@ export const plot = (transfer_function: Transfer_Function, lower: number, upper:
             title: { text: 'ω (rad/s)' }
         },
         yaxis: {
-            type: 'log' as const,
+            // type: 'log' as const,
             autorange: true,
-            title: { text: '|H(jω)|' }
+            title: { text: '|H(jω)| (db)' }
         },
         title: { text: 'Magnitude Plot' }
         // paper_bgcolor: '#33383b',
